@@ -4,9 +4,16 @@
   <title>Frontend</title>
   <script>
     async function fetchBackendData() {
-      const response = await fetch("http://tf-alb-2103355234.us-east-1.elb.amazonaws.com/health");
-      const data = await response.json();
-      document.getElementById("backend-data").textContent = JSON.stringify(data, null, 2);
+      try {
+        const response = await fetch("https://tf-alb-2103355234.us-east-1.elb.amazonaws.com/health");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        document.getElementById("backend-data").textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        document.getElementById("backend-data").textContent = `Error: ${error.message}`;
+      }
     }
   </script>
 </head>
