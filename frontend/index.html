@@ -4,15 +4,27 @@
   <title>Frontend</title>
   <script>
     async function fetchBackendData() {
+      const outputElement = document.getElementById("backend-data");
       try {
-        const response = await fetch("https://tf-alb-2103355234.us-east-1.elb.amazonaws.com/health");
+        // Display a loading message
+        outputElement.textContent = "Loading data from backend...";
+
+        // Make the API request
+        const response = await fetch("http://tf-alb-2103355234.us-east-1.elb.amazonaws.com/health");
+        
+        // Check if the response is OK
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
+        // Parse JSON data
         const data = await response.json();
-        document.getElementById("backend-data").textContent = JSON.stringify(data, null, 2);
+
+        // Display data
+        outputElement.textContent = JSON.stringify(data, null, 2);
       } catch (error) {
-        document.getElementById("backend-data").textContent = `Error: ${error.message}`;
+        // Display error details
+        outputElement.textContent = `Error fetching backend data: ${error.message}`;
       }
     }
   </script>
@@ -20,6 +32,6 @@
 <body onload="fetchBackendData()">
   <h1>Frontend Static Site</h1>
   <p>Backend Data:</p>
-  <pre id="backend-data"></pre>
+  <pre id="backend-data" style="border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;"></pre>
 </body>
 </html>
