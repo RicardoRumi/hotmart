@@ -91,3 +91,28 @@ resource "aws_iam_role_policy" "fargate" {
 }
 EOF
 }
+
+# Add this resource to grant full S3 and CloudFront permissions to the ecr-publisher IAM user
+
+resource "aws_iam_user_policy" "publisher_full_access" {
+  name = "ecr-publisher-full-access"
+  user = aws_iam_user.publisher.name
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "cloudfront:*",
+      "Resource": "*"
+    }
+  ]
+}
+EOF
+}
