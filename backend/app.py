@@ -4,10 +4,12 @@ import socket
 import flask
 
 from flask import Flask, jsonify, render_template_string
+from flask_cors import CORS  
 
 
 def create_app():
     app = flask.Flask(__name__)
+    CORS(app)
 
     @app.route('/health')
     def base_healthcheck_route():
