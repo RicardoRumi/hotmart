@@ -1,5 +1,3 @@
-# security_groups.tf
-
 resource "aws_security_group" "alb_sg" {
   name        = "${local.lb.name}-sg"
   description = "Allow inbound HTTP traffic to the ALB"

@@ -43,3 +43,11 @@ output "container_name" {
   value       = local.container.name
   description = "Container name for the ECS task"
 }
+
+output "frontend_s3_bucket" {
+  value = aws_s3_bucket.frontend_bucket.bucket
+}
+
+output "cloudfront_url" {
+  value = aws_cloudfront_distribution.frontend_distribution.domain_name
+}

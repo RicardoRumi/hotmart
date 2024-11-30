@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Frontend</title>
+  <script>
+    async function fetchBackendData() {
+      const response = await fetch("http://<your-backend-url>/health");
+      const data = await response.json();
+      document.getElementById("backend-data").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</head>
+<body onload="fetchBackendData()">
+  <h1>Frontend Static Site</h1>
+  <p>Backend Data:</p>
+  <pre id="backend-data"></pre>
+</body>
+</html>
