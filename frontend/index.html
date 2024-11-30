@@ -4,7 +4,7 @@
   <title>Frontend</title>
   <script>
     async function fetchBackendData() {
-      const response = await fetch("http://<your-backend-url>/health");
+      const response = await fetch("http://tf-alb-2103355234.us-east-1.elb.amazonaws.com/health");
       const data = await response.json();
       document.getElementById("backend-data").textContent = JSON.stringify(data, null, 2);
     }
