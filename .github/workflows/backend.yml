@@ -1,15 +1,11 @@
 ---
-name: "workflow"
+name: "Backend CI/CD"
+
 
 'on':
   push:
-    branches:
-      - main
     tags:
-      - "*"
-  pull_request:
-    branches:
-      - main
+      - "b*"
 
 jobs:
   ci:
