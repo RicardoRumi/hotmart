@@ -12,8 +12,9 @@ resource "aws_s3_account_public_access_block" "this" {
 
 # S3 Bucket
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket = "ricardo-rumi-frontend-bucket-name"
+  bucket = "ricardo-rum-frontend-bucket-name"
   # Note: Do not set the 'acl' parameter here
+  force_destroy = true
 }
 
 # Bucket-Level Block Public Access Settings
@@ -61,6 +62,10 @@ resource "aws_s3_bucket_cors_configuration" "frontend_cors" {
 # Bucket Policy to Allow Public Read Access
 resource "aws_s3_bucket_policy" "frontend_policy" {
   bucket = aws_s3_bucket.frontend_bucket.id
+
+  depends_on = [
+    aws_s3_bucket_public_access_block.frontend_access_block
+  ]
 
   policy = jsonencode({
     Version = "2012-10-17",
